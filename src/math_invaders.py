@@ -264,13 +264,13 @@ while running:
         bullet(bullet_X, bullet_Y)
         bullet_Y -= bullet_Ychange
 
-    equation_text = f"Solve the equation: {sp.pretty(equation)}"
+    equation_text = f"Solve for X: {sp.pretty(equation)}"
 
     equation_surface = font.render(equation_text, True, (255, 255, 255))
 
     textRect = equation_surface.get_rect()
 
-    textRect.center = (154, 50)
+    textRect.center = (125, 50)
 
     screen.blit(equation_surface, textRect)
 
