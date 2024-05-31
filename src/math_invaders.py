@@ -3,6 +3,9 @@ import random
 import math
 from pygame import mixer
 import sympy as sp
+import os
+
+cwd = os.path.dirname(os.path.abspath(__file__))
 
 pygame.init()
 
@@ -11,10 +14,10 @@ screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 pygame.display.set_caption("Math Invaders")
-font = pygame.font.Font("./fonts/font.ttf", 20)
+font = pygame.font.Font(f"{cwd}/fonts/font.ttf", 20)
 
-title_font = pygame.font.Font("./fonts/font.ttf", 64)
-button_font = pygame.font.Font("./fonts/font.ttf", 32)
+title_font = pygame.font.Font(f"{cwd}/fonts/font.ttf", 64)
+button_font = pygame.font.Font(f"{cwd}/fonts/font.ttf", 32)
 
 
 def title_screen():
@@ -96,15 +99,24 @@ equations = [
 
 
 def show_score(x, y, bx, by):
-    score = font.render("Your Points: " + str(score_val), True, (255, 255, 255))
+    score = font.render(
+        "Your Points: " +
+        str(score_val),
+        True,
+        (255, 255, 255)
+    )
     screen.blit(score, (x, y))
 
-    bullet_text = font.render("Bullets: " + str(bullet_count), True, (255, 255, 255))
+    bullet_text = font.render(
+        "Bullets: " + str(bullet_count),
+        True,
+        (255, 255, 255)
+    )
     screen.blit(bullet_text, (bx, by))
 
 
 # Game Over
-game_over_font = pygame.font.Font("./font/font.ttf", 64)
+game_over_font = pygame.font.Font(f"{cwd}/fonts/font.ttf", 64)
 
 
 def game_over():
@@ -113,12 +125,12 @@ def game_over():
 
 
 # Background music
-mixer.music.load("./audio/music.mp3")
+mixer.music.load(f"{cwd}/audio/music.mp3")
 mixer.music.set_volume(0.5)
 mixer.music.play(-1)
 
 # loading the player image and location
-playerImage = pygame.image.load("./img/spaceship.png")
+playerImage = pygame.image.load(f"{cwd}/img/spaceship.png")
 player_X = 370
 player_Y = 523
 player_Xchange = 0
@@ -132,14 +144,14 @@ invader_Ychange = []
 no_of_invaders = 3
 
 for num in range(no_of_invaders):
-    invaderImage.append(pygame.image.load("./img/alien.png"))
+    invaderImage.append(pygame.image.load(f"{cwd}/img/alien.png"))
     invader_X.append(random.randint(64, 737))
     invader_Y.append(random.randint(30, 180))
     invader_Xchange.append(0.6)
     invader_Ychange.append(50)
 
 # pew pew
-bulletImage = pygame.image.load("./img/bullet.png")
+bulletImage = pygame.image.load(f"{cwd}/img/bullet.png")
 bullet_X = 0
 bullet_Y = 500
 bullet_Xchange = 0
@@ -231,7 +243,7 @@ while running:
                 if bullet_state == "rest":
                     bullet_X = player_X
                     bullet(bullet_X, bullet_Y)
-                    bullet_sound = mixer.Sound("bruh.wav")
+                    bullet_sound = mixer.Sound(f"{cwd}/audio/bruh.wav")
                     bullet_sound.play()
                     bullet_count -= 1
         if event.type == pygame.KEYUP:
@@ -265,7 +277,11 @@ while running:
     if not input_box.active and input_box.text:
         user_answer = sp.sympify(input_box.text)
         if user_answer not in correct_answers:
-            incorrect_text = font.render("Incorrect. Try again.", True, (255, 0, 0))
+            incorrect_text = font.render(
+                "Incorrect. Try again.",
+                True,
+                (255, 0, 0)
+            )
             screen.blit(incorrect_text, (50, 100))
             pygame.display.flip()
             pygame.time.delay(1000)
@@ -286,7 +302,7 @@ while running:
         screen.blit(win_text, (190, 250))
         pygame.display.update()
         pygame.time.delay(2000)
-        win_sound = mixer.Sound("./audio/win.mp3")
+        win_sound = mixer.Sound(f"{cwd}/audio/win.mp3")
         win_sound.play()
         pygame.quit()
         running = False
@@ -297,7 +313,7 @@ while running:
             if abs(player_X - invader_X[i]) < 80:
                 for j in range(no_of_invaders):
                     invader_Y[j] = 2000
-                    explosion_sound = mixer.Sound("./audio/explosion.mp3")
+                    explosion_sound = mixer.Sound(f"{cwd}/audio/explosion.mp3")
                     explosion_sound.play()
                 game_over()
                 break
