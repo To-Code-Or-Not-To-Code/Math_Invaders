@@ -153,7 +153,7 @@ for num in range(no_of_invaders):
     pos_x = random.randint(64, 737)
     pos_y = random.randint(30, 180)
 
-    while not (pos_x in invader_X and pos_y in invader_Y):
+    while (pos_x in invader_X and pos_y in invader_Y):
         pos_x = random.randint(64, 737)
         pos_y = random.randint(30, 180)
 
@@ -237,7 +237,6 @@ input_box = InputBox(100, 550, 140, 32)
 # Choose the first equation outside the game loop
 equation, correct_answers = random.choice(equations)
 show_title_screen()
-pygame.init()
 running = True
 while running:
     screen.fill((0, 0, 0))
@@ -283,7 +282,7 @@ while running:
 
     textRect = equation_surface.get_rect()
 
-    textRect.center = (125, 50)
+    textRect.center = (118, 50)
 
     screen.blit(equation_surface, textRect)
 
