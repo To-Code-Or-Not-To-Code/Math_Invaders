@@ -49,4 +49,4 @@ If an alien collides with your spaceship or reaches the bottom of the screen, th
 - Background music and sound effects by mixer.
 
 **Note:**
-Make sure to have the required libraries installed and the game assets (images, sounds) in the same directory as the Python script for the game to run successfully.
+Make sure to have the required libraries installed and the game assets (images, sounds) in the same directory as the Python script for the game to run successfully. You can install them by running `python.exe -m pip install -r requirements.txt` on Windows and `sudo pip3 install -r requirements.txt` on Mac/Linux.

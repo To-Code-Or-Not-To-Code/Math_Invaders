@@ -9,11 +9,15 @@ cwd = os.path.dirname(os.path.abspath(__file__))
 
 pygame.init()
 
+icon = pygame.image.load(f"{cwd}/img/icon.png")
+
+pygame.display.set_icon(icon)
+pygame.display.set_caption("Math Invaders")
+
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-pygame.display.set_caption("Math Invaders")
 font = pygame.font.Font(f"{cwd}/fonts/font.ttf", 20)
 
 title_font = pygame.font.Font(f"{cwd}/fonts/font.ttf", 64)
@@ -145,8 +149,17 @@ no_of_invaders = 3
 
 for num in range(no_of_invaders):
     invaderImage.append(pygame.image.load(f"{cwd}/img/alien.png"))
-    invader_X.append(random.randint(64, 737))
-    invader_Y.append(random.randint(30, 180))
+
+    pos_x = random.randint(64, 737)
+    pos_y = random.randint(30, 180)
+
+    while not (pos_x in invader_X and pos_y in invader_Y):
+        pos_x = random.randint(64, 737)
+        pos_y = random.randint(30, 180)
+
+    invader_X.append(pos_x)
+    invader_Y.append(pos_y)
+
     invader_Xchange.append(0.6)
     invader_Ychange.append(50)
 
