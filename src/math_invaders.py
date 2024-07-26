@@ -500,7 +500,14 @@ while running:
     if not input_box.active and input_box.text:
         # Get answer #
 
-        user_answer = sp.sympify(input_box.text)
+        # Check if answer is valid, if it isn't, remove text om text box #
+
+        try:
+            user_answer = sp.sympify(input_box.text)
+        except sp.SympifyError:
+            input_box.text = ""
+            pygame.display.flip()
+            continue
 
         if user_answer not in correct_answers:
             # Set text surface and draw #
