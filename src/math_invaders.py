@@ -506,8 +506,6 @@ while running:
             user_answer = sp.sympify(input_box.text)
         except sp.SympifyError:
             input_box.text = ""
-            pygame.display.flip()
-            continue
 
         if user_answer not in correct_answers:
             # Set text surface and draw #
